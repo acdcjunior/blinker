@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Blinker</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript" src="//unpkg.com/vue"></script>
+
+
+
+
+  <style id="compiled-css" type="text/css">
+      html,
+body {
+  height: 100%;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  background: white;
+}
+
+  </style>
+
+
+  <script type="text/javascript">
+
+
+    window.onload=function(){
+      
+new Vue({
+  el: "#app",
+  data: {
+  	timer: null,
+    bob: ''
+  },
+  created() {
+  	this.start();
+  },
+  methods: {
+  	start() {
+    	this.timer = setInterval(this.go, 1000)
+    },
+    stop() {
+    	clearInterval(this.timer); this.timer = null; this.reset();
+    },
+    toggle() {
+    	if (this.timer) this.stop();
+      else this.start();
+    },
+  	go(){
+    	this.bob = 'background: #20262E;';
+      setTimeout(this.reset, 100)
+    },
+    reset() {
+    	this.bob = '';
+    }
+  }
+})
+
+    }
+
+</script>
+
+</head>
+<body>
+    <div id="app" :style="bob" @click="toggle">
+  <h2>{{ this.timer ? 'Started' : 'Stopped' }}</h2>
+</div>
+
+
+</body>
+</html>
